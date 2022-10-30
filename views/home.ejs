@@ -9,3 +9,16 @@
   </form>
 </div>
 <% } %>
+
+<div class="posts-list-container">
+  <ul>
+    <% for(post of locals.posts) {%> 
+      <li>
+        <%=post.content%> 
+      </li>
+      <small>
+        <%= post.user.name %> 
+      </small>
+    <%  }%> 
+  </ul>
+</div>
