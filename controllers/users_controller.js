@@ -1,15 +1,22 @@
 const userCollection = require("../models/user");
 module.exports.profile = function (req, res) {
+  //console.log(req.user);
   return res.render("user_profile", {
     title: "User Profile",
   });
 };
 module.exports.signIn = function (req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   return res.render("user_sign_in", {
     title: "codeial | Sign in",
   });
 };
 module.exports.signUp = function (req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   return res.render("user_sign_up", {
     title: "codeial | Sign up",
   });
@@ -33,5 +40,16 @@ module.exports.create = function (req, res) {
     }
   });
 };
-
-module.exports.createSession = function (req, res) {};
+// sign-in and create a session for the user
+module.exports.createSession = function (req, res) {
+  return res.redirect("/");
+};
+module.exports.deleteSession = function (req, res) {
+  req.logout((err) => {
+    if (err) {
+      console.log("Unable to log out");
+      return res.redirect("back");
+    }
+    return res.redirect("/");
+  });
+};
