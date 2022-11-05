@@ -1,28 +1,25 @@
 const postdb = require("../models/posts");
 const users = require("../models/user");
-module.exports.home = function (req, res) {
-  postdb
-    .find({})
-    .populate("user")
-    .populate({
-      path: "comments",
-      populate: {
-        path: "user",
-      },
-    })
-    .exec((err, posts) => {
-      if (err) {
-        console.log("Unable to find posts");
-        return;
-      }
-      users.find({}, (err, users) => {
-        return res.render("home", {
-          title: "Home",
-          posts: posts,
-          all_users: users,
-        });
+module.exports.home = async function (req, res) {
+  try {
+    let posts = await postdb
+      .find({})
+      .populate("user")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+        },
       });
+    let all_users = await users.find({});
+    return res.render("home", {
+      title: "Home",
+      posts: posts,
+      all_users: all_users,
     });
+  } catch (error) {
+    console.log("Error", error);
+  }
 };
 
 // module.exports.actionName = function(req, res){}
