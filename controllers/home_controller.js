@@ -1,4 +1,5 @@
 const postdb = require("../models/posts");
+const users = require("../models/user");
 module.exports.home = function (req, res) {
   postdb
     .find({})
@@ -14,9 +15,12 @@ module.exports.home = function (req, res) {
         console.log("Unable to find posts");
         return;
       }
-      return res.render("home", {
-        title: "Home",
-        posts: posts,
+      users.find({}, (err, users) => {
+        return res.render("home", {
+          title: "Home",
+          posts: posts,
+          all_users: users,
+        });
       });
     });
 };

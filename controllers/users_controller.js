@@ -1,9 +1,19 @@
 const userCollection = require("../models/user");
 module.exports.profile = function (req, res) {
   //console.log(req.user);
-  return res.render("user_profile", {
-    title: "User Profile",
+  userCollection.findById(req.params.id, (err, user) => {
+    return res.render("user_profile", {
+      title: "User Profile",
+      profile_user: user,
+    });
   });
+};
+module.exports.update = function (req, res) {
+  if (req.user.id == req.params.id) {
+    userCollection.findByIdAndUpdate(req.user.id, req.body, (err, user) => {
+      return res.redirect("back");
+    });
+  }
 };
 module.exports.signIn = function (req, res) {
   if (req.isAuthenticated()) {

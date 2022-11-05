@@ -1,4 +1,5 @@
 const postdb = require("../models/posts");
+const comments = require("../models/comment");
 module.exports.create = (req, res) => {
   postdb.create(
     {
@@ -13,4 +14,20 @@ module.exports.create = (req, res) => {
       return res.redirect("back");
     }
   );
+};
+
+module.exports.destroy = (req, res) => {
+  postdb.findById(req.params.id, (err, post) => {
+    if (!post) {
+      return res.redirect("back");
+    }
+    if (post.user == req.user.id) {
+      post.remove();
+      comments.deleteMany({ post: req.params.id }, (err) => {
+        return res.redirect("back");
+      });
+    } else {
+      return res.redirect("back");
+    }
+  });
 };
