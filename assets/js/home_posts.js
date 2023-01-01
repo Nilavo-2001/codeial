@@ -10,8 +10,9 @@
         data: form.serialize(),
         success: function (response) {
           let post = getPost(response.data.posts);
-          $("#posts-list-container ul").prepend(post);
-          console.log(response);
+          $("#posts-list-container > ul").prepend(post);
+          deletePost();
+          //console.log(response);
         },
         error: function (error) {
           console.log(error);
@@ -54,5 +55,22 @@
      </li>
      `;
   };
+  let deletePost = () => {
+    console.log(`delete post `);
+    $(".delete-post-button").click(function (e) {
+      console.log("I am clicked");
+      e.preventDefault();
+      $.ajax({
+        type: "get",
+        url: $(this).prop("href"),
+        success: function (response) {
+          console.log(response.data.post_id);
+          $(`#post-${response.data.post_id}`).remove();
+        },
+        error: function () {},
+      });
+    });
+  };
+  deletePost();
   createPost();
 }
