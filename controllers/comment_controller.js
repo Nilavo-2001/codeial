@@ -11,6 +11,7 @@ module.exports.create = async function (req, res) {
       });
       post.comments.push(comment.id);
       await post.save();
+      req.flash("sucess", "Comment added");
       res.redirect("/");
     }
   } catch (error) {
@@ -26,6 +27,7 @@ module.exports.destroy = async function (req, res) {
     await posts.findByIdAndUpdate(postid, {
       $pull: { comments: req.params.id },
     });
+    req.flash("sucess", "Comment deleted");
     return res.redirect("back");
   } else {
     return res.redirect("back");

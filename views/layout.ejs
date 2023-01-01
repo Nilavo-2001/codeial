@@ -1,28 +1,54 @@
 <html>
-    <head>
-        <title>
-            <%= title  %>
-        </title>
-        <link rel="stylesheet" href="/css/layout.css">
-        <link rel="stylesheet" href="/css/header.css">
-        <link rel="stylesheet" href="/css/footer.css">
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css"
+      integrity="sha512-NXUhxhkDgZYOMjaIgd89zF2w51Mub53Ru3zCNp5LTlEzMbNNAjTjDbpURYGS5Mop2cU4b7re1nOIucsVlrx9fA=="
+      crossorigin="anonymous"
+    />
 
-        <%- style %>
-        
-    </head>
+    <%- style %>
+  </head>
 
-    <body>
-        <%- include('_header'); %>
-        
-        <main id="layout-main">
-            <%- body %>
+  <body>
+    <%- include('_header'); %>
 
-        </main>
-
-
-        <%- include('_footer'); %>
-
-        <%- script %>
-        
-    </body>
+    <main id="layout-main"><%- body %></main>
+    <%- include('_footer'); %>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+      integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      <% if (flash.sucess && flash.sucess.length != 0) { %>
+         new Noty({
+            theme: 'relax',
+            text: "<%= flash.sucess %>",
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+         }).show();
+       <% } %>
+       <% if (flash.error && flash.error.length != 0) { %>
+         new Noty({
+            theme: 'relax',
+            text: "<%= flash.error %>",
+            type: 'error',
+            layout: 'topRight',
+            timeout: 1500
+         }).show();
+       <% } %>
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <%- script %>
+  </body>
 </html>

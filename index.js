@@ -10,6 +10,8 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 const MongoStore = require("connect-mongo");
 const sassMiddleware = require("node-sass-middleware");
+const flash = require("connect-flash");
+const flash_midware = require("./middlewares/flash_message");
 
 // using sass middleware
 app.use(
@@ -22,9 +24,9 @@ app.use(
   })
 );
 
-app.use(express.urlencoded());
+app.use(express.urlencoded()); // used for filling up req.body
 app.use(cookieParser());
-app.use(express.static("./assets"));
+app.use(express.static("./assets")); // used for serving static files like html css js
 
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
@@ -54,6 +56,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+app.use(flash());
+app.use(flash_midware.flash_message);
 // use express router
 app.use("/", require("./routes"));
 

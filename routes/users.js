@@ -13,6 +13,11 @@ router.get(
   passport.checkAuthentication,
   usersConrtoller.profile
 );
+router.get(
+  "/profile",
+  passport.checkAuthentication,
+  usersConrtoller.selfProfile
+);
 router.get("/sign-in", usersConrtoller.signIn);
 router.get("/sign-up", usersConrtoller.signUp);
 router.post("/create", usersConrtoller.create);
