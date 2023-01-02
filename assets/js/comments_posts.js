@@ -1,7 +1,7 @@
 console.log("Comment Post is here");
-let createComment = () => {
+function createComment(selector) {
   console.log("create comment");
-  let form = $(".new-comment-form");
+  let form = $(selector);
   form.submit(function (e) {
     console.log("create comment clicked");
     e.preventDefault();
@@ -14,7 +14,9 @@ let createComment = () => {
         //console.log(response.data.comment._id);
         let comment = getComment(response.data.comment);
         $(`#post-comments-${response.data.comment.post}`).prepend(comment);
-        deleteComment();
+        deleteComment(
+          `#comment-${response.data.comment._id} .delete-comment-button`
+        );
         new Noty({
           theme: "relax",
           text: "Comment Created",
@@ -25,7 +27,7 @@ let createComment = () => {
       },
     });
   });
-};
+}
 let getComment = (comment) => {
   return `<p id="comment-${comment._id}">
   <small>
@@ -44,12 +46,10 @@ let getComment = (comment) => {
 </p>
 `;
 };
-function deleteComment() {
+function deleteComment(selector) {
   console.log(`delete comment`);
-  $(".delete-comment-button").click(function (e) {
+  $(selector).click(function (e) {
     console.log("I am clicked");
-    e.preventDefault();
-    return;
     e.preventDefault();
     $.ajax({
       type: "get",
@@ -71,6 +71,6 @@ function deleteComment() {
     });
   });
 }
-deleteComment();
-createComment();
-//export { deleteComment, createComment, getComment };
+createComment(".new-comment-form");
+deleteComment(".delete-comment-button");
+export { deleteComment, createComment, getComment };

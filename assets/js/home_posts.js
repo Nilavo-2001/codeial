@@ -1,5 +1,5 @@
 //ajax req
-//import { createComment, deleteComment, getComment } from "./comments_posts.js";
+import { createComment, deleteComment, getComment } from "./comments_posts.js";
 
 let createPost = () => {
   let form = $("#new-post-form");
@@ -15,9 +15,9 @@ let createPost = () => {
         let post = getPost(response.data.posts);
         // console.log(response);
         $("#posts-list-container > ul").prepend(post);
-        deletePost();
-        // createComment();
-        //deleteComment();
+        deletePost(`#post-${response.data.posts._id} .delete-post-button`);
+        createComment(`#post-${response.data.posts._id} .new-comment-form`);
+        // deleteComment();
         new Noty({
           theme: "relax",
           text: "Post Created",
@@ -68,9 +68,9 @@ let getPost = (post) => {
      </li>
      `;
 };
-let deletePost = () => {
-  //console.log(`delete post `);
-  $(".delete-post-button").click(function (e) {
+let deletePost = (selector) => {
+  console.log(`delete post `);
+  $(selector).click(function (e) {
     console.log("I am clicked");
     e.preventDefault();
     $.ajax({
@@ -94,6 +94,4 @@ let deletePost = () => {
   });
 };
 createPost();
-deletePost();
-//createComment();
-//deleteComment();
+deletePost(".delete-post-button");
