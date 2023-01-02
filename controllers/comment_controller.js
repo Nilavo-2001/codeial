@@ -11,6 +11,7 @@ module.exports.create = async function (req, res) {
       });
       post.comments.push(comment.id);
       await post.save();
+      comment = await comments.findById(comment.id).populate("user");
       if (req.xhr) {
         return res.status(200).json({
           data: {
@@ -29,6 +30,8 @@ module.exports.create = async function (req, res) {
 
 module.exports.destroy = async function (req, res) {
   let comment = await comments.findById(req.params.id);
+  console.log(req.params.id);
+  console.log(comment);
   if ((comment.user = req.user.id)) {
     let postid = comment.post;
     await comment.remove();
@@ -38,7 +41,7 @@ module.exports.destroy = async function (req, res) {
     if (req.xhr) {
       return res.status(200).json({
         data: {
-          post_id: postid,
+          comment_id: req.params.id,
         },
         message: "post sucessfully deleted",
       });

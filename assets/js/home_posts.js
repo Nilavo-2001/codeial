@@ -1,22 +1,31 @@
 //ajax req
+//import { createComment, deleteComment, getComment } from "./comments_posts.js";
 
-deleteComment();
 let createPost = () => {
   let form = $("#new-post-form");
   form.submit(function (e) {
     console.log("cp clicked");
     e.preventDefault();
-    console.log(form.serialize());
+    //console.log(form.serialize());
     $.ajax({
       type: "post",
       url: "/posts/create",
       data: form.serialize(),
       success: function (response) {
         let post = getPost(response.data.posts);
+        // console.log(response);
         $("#posts-list-container > ul").prepend(post);
         deletePost();
-        new Comment();
-        console.log(response);
+        // createComment();
+        //deleteComment();
+        new Noty({
+          theme: "relax",
+          text: "Post Created",
+          type: "success",
+          layout: "topRight",
+          timeout: 1500,
+        }).show();
+        // console.log(response);
       },
       error: function (error) {
         console.log(error);
@@ -40,7 +49,7 @@ let getPost = (post) => {
        </p>
        <div class="post-comments">
        
-         <form action="/comment/create" method="post">
+         <form action="/comment/create" method="post" class="new-comment-form">
            <input
              type="text"
              name="content"
@@ -60,7 +69,7 @@ let getPost = (post) => {
      `;
 };
 let deletePost = () => {
-  console.log(`delete post `);
+  //console.log(`delete post `);
   $(".delete-post-button").click(function (e) {
     console.log("I am clicked");
     e.preventDefault();
@@ -68,8 +77,15 @@ let deletePost = () => {
       type: "get",
       url: $(this).prop("href"),
       success: function (response) {
-        console.log(response.data.post_id);
+        //console.log(response.data.post_id);
         $(`#post-${response.data.post_id}`).remove();
+        new Noty({
+          theme: "relax",
+          text: "Post Deleted",
+          type: "success",
+          layout: "topRight",
+          timeout: 1500,
+        }).show();
       },
       error: function (error) {
         console.log(error);
@@ -77,6 +93,7 @@ let deletePost = () => {
     });
   });
 };
-deletePost();
 createPost();
-new Comment();
+deletePost();
+//createComment();
+//deleteComment();
