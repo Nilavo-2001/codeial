@@ -27,7 +27,7 @@ app.use(
 app.use(express.urlencoded()); // used for filling up req.body
 app.use(cookieParser());
 app.use(express.static("./assets")); // used for serving static files like html css js
-
+app.use("/uploads", express.static("./uploads")); // to search in the given folder for any file path that starts with /uploads
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
 app.set("layout extractStyles", true);

@@ -1,4 +1,6 @@
 const userCollection = require("../models/user");
+const fs = require("fs");
+const path = require("path");
 module.exports.selfProfile = async function (req, res) {
   let user = await userCollection.findById(req.user.id);
   return res.render("user_profile", {
@@ -16,8 +18,27 @@ module.exports.profile = async function (req, res) {
 };
 module.exports.update = async function (req, res) {
   if (req.user.id == req.params.id) {
-    await userCollection.findByIdAndUpdate(req.user.id, req.body);
-    return res.redirect("back");
+    let user = await userCollection.findById(req.user.id);
+    userCollection.uploadedAvatar(req, res, function (err) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      user.name = req.body.name;
+      user.email = req.body.email;
+      if (req.file) {
+        // checking if a file is uploaded
+        if (
+          user.avatar &&
+          fs.existsSync(path.join(__dirname, "..", user.avatar)) // checking if the file exsists
+        ) {
+          fs.unlinkSync(path.join(__dirname, "..", user.avatar)); // deleteing the file if it exsists
+        }
+        user.avatar = userCollection.avatarPath + "/" + req.file.filename;
+      }
+      user.save(); // updating the document
+      return res.redirect("back");
+    });
   }
 };
 module.exports.signIn = function (req, res) {
