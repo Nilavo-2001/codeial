@@ -34,7 +34,7 @@ module.exports.update = async function (req, res) {
         ) {
           fs.unlinkSync(path.join(__dirname, "..", user.avatar)); // deleteing the file if it exsists
         }
-        user.avatar = userCollection.avatarPath + "/" + req.file.filename;
+        user.avatar = userCollection.avatarPath + "/" + req.file.filename; // storing the path where the uploaded image is stored
       }
       user.save(); // updating the document
       return res.redirect("back");

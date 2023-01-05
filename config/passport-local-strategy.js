@@ -7,6 +7,7 @@ passport.use(
     {
       usernameField: "email",
     },
+    // the function defined to check if the user exsists and then creating a session for the user
     function (email, password, done) {
       User.findOne({ email: email }, (err, user) => {
         if (err) {
@@ -18,7 +19,7 @@ passport.use(
           return done(null, false);
         }
 
-        return done(null, user);
+        return done(null, user); // passing the user so the session can be created
       });
     }
   )
@@ -27,7 +28,7 @@ passport.use(
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
-// deserializing
+// deserializing or extracting the user from the cookie coming in with every re from browser after auth
 passport.deserializeUser(function (id, done) {
   User.findById(id, function (err, user) {
     if (err) {
@@ -39,6 +40,7 @@ passport.deserializeUser(function (id, done) {
 });
 // check if the user is authenticated
 passport.checkAuthentication = function (req, res, next) {
+  // this is the most crutial function of authentication which will very the session for every requests
   if (res.locals.user) {
     console.log("Profile page found");
     return next();
