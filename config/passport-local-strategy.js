@@ -26,10 +26,11 @@ passport.use(
 );
 // serializing the user to decide which key is to be kept in the cookies
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  done(null, user.id); //this function is applicable for local,google startegy
 });
 // deserializing or extracting the user from the cookie coming in with every re from browser after auth
 passport.deserializeUser(function (id, done) {
+  console.log("deserialized user called"); // this function is also called for all startegies
   User.findById(id, function (err, user) {
     if (err) {
       console.log("error in finding user---> passport");
@@ -40,6 +41,7 @@ passport.deserializeUser(function (id, done) {
 });
 // check if the user is authenticated
 passport.checkAuthentication = function (req, res, next) {
+  console.log("check authentication called");
   // this is the most crutial function of authentication which will very the session for every requests
   if (res.locals.user) {
     console.log("Profile page found");
@@ -47,13 +49,13 @@ passport.checkAuthentication = function (req, res, next) {
   }
   console.log("Profile page not found");
   // if the user is not signed in
-  return res.redirect("/users/sign-in");
+  return res.redirect("/users/sign-in"); // this is also called for all startegies
 };
 passport.setAuthenticatedUser = function (req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.user = req.user;
   }
-  next();
+  next(); // this is also called for both local and google
 };
 
 module.exports = passport;
