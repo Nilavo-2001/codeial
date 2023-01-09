@@ -1,5 +1,6 @@
 const comments = require("../models/comment");
 const posts = require("../models/posts");
+const mailer = require("../mailers/comments_mailer");
 module.exports.create = async function (req, res) {
   try {
     let post = await posts.findById(req.body.post);
@@ -11,7 +12,9 @@ module.exports.create = async function (req, res) {
       });
       post.comments.push(comment.id);
       await post.save();
-      comment = await comments.findById(comment.id).populate("user");
+      // syntax to populate an exsisting doc
+      comment = await comments.populate(comment, { path: "user" });
+      mailer.newComment(comment);
       if (req.xhr) {
         return res.status(200).json({
           data: {

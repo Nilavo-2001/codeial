@@ -30,10 +30,10 @@ router.get("/sign-out", usersConrtoller.deleteSession);
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
-);
+); // controller corresponding to the req send by the browser for authentication to google and for data like profile and email
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/users/sign-in" }),
   usersConrtoller.createSession
-);
+); // controller to authenticate a user after google responds with user data for the above requests
 module.exports = router;
