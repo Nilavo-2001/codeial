@@ -10,7 +10,7 @@ router.use("/users", require("./users"));
 router.use("/posts", require("./post"));
 router.use("/comment", require("./comment"));
 router.use("/api", require("./api/index"));
-
+router.use("/forgot-password", require("./forgot_password"));
 // for any further routes, access from here
 // router.use('/routerName', require('./routerfile));
 
