@@ -6,12 +6,16 @@ module.exports.home = async function (req, res) {
       .find({})
       .sort("-createdAt")
       .populate("user")
+      .populate("likes")
       .populate({
         path: "comments",
-        populate: {
+        populate: [{
           path: "user",
-        },
+        }, {
+          path: "likes",
+        }]
       });
+    //console.log(posts[0].comments[0]);
     let all_users = await users.find({});
     return res.render("home", {
       title: "Home",

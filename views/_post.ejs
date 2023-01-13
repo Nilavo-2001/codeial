@@ -1,34 +1,66 @@
 <li id="post-<%= post._id %>">
   <p>
     <% if (locals.user && locals.user.id==post.user.id) { %>
-    <small>
-      <button>
-        <a class="delete-post-button" href="/posts/destroy/<%= post.id %> ">
-          Delete
-        </a>
-      </button>
-    </small>
-    <% } %> <%=post.content%>
-    <br />
-    <small> <%= post.user.name %> </small>
+      <small>
+        <button>
+          <a class="delete-post-button" href="/posts/destroy/<%= post.id %> ">
+            Delete
+          </a>
+        </button>
+      </small>
+      <% } %>
+        <%=post.content%>
+          <br />
+          <small>
+            <%= post.user.name %>
+          </small>
   </p>
-  <div class="post-comments">
-    <% if (locals.user) { %>
-    <form action="/comment/create" method="post" class="new-comment-form">
-      <input
-        type="text"
-        name="content"
-        placeholder="Type your comment here..."
-      />
-      <input type="hidden" name="post" value="<%=post.id%>" />
-      <input type="submit" value="Add comment" />
-    </form>
-    <% } %>
-    <div class="post-comments-list">
-      <ul id="post-comments-<%= post.id %>">
-        <% for( comment of post.comments) { %> <%- include('_comment') %> <% }
-        %>
-      </ul>
+  <% if (locals.user) { %>
+    <div class="post-like">
+      <div data-id="<%= post._id %>" class="like-symbol">
+        <% let userHasLiked=false; %>
+          <% for( like of post.likes ) { %>
+            <% if (like.user==locals.user.id) { %>
+              <% userHasLiked=true; %>
+                <% break; %>
+                  <% } %>
+                    <% } %>
+                      <% if (userHasLiked) { %>
+                        <%= "❤️" %>
+                          <% } else { %>
+                            <%= "🤍" %>
+                              <% } %>
+      </div>
+      <div data-id="<%= post._id %>" class="like-number">
+        <% if (post.likes.length>0) { %>
+          <%= post.likes.length %>
+            <% } %>
+      </div>
     </div>
-  </div>
+    <% } else { %>
+      <div class="show-post-like">
+        <div class="like-symbol"><a href="http://localhost:8000/users/sign-in">🤍</a></div>
+        <div class="like-number">
+          <% if (post.likes.length>0) { %>
+            <%= post.likes.length %>
+              <% } %>
+        </div>
+      </div>
+      <% } %>
+
+        <div class="post-comments">
+          <% if (locals.user) { %>
+            <form action="/comment/create" method="post" class="new-comment-form">
+              <input type="text" name="content" placeholder="Type your comment here..." />
+              <input type="hidden" name="post" value="<%=post.id%>" />
+              <input type="submit" value="Add comment" />
+            </form>
+            <% } %>
+              <div class="post-comments-list">
+                <ul id="post-comments-<%= post.id %>">
+                  <% for( comment of post.comments) { %> <%- include('_comment') %>
+                      <% } %>
+                </ul>
+              </div>
+        </div>
 </li>

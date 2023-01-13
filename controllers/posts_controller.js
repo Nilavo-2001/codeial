@@ -1,5 +1,6 @@
 const postdb = require("../models/posts");
 const comments = require("../models/comment");
+const likes = require("../models/likes");
 module.exports.create = async function (req, res) {
   try {
     let post = await postdb.create({
@@ -24,12 +25,19 @@ module.exports.create = async function (req, res) {
 
 module.exports.destroy = async function (req, res) {
   try {
-    let post = await postdb.findById(req.params.id);
+    let post = await postdb.findById(req.params.id).populate("comments");
     if (!post) {
       return res.redirect("back");
     }
     if (post.user == req.user.id) {
       await post.remove();
+      await likes.deleteMany({
+        likeable: req.params.id,
+        onModel: "Post"
+      })
+      for (comment of post.comments) {
+        await likes.deleteMany({ _id: { $in: comment.likes } });
+      }
       await comments.deleteMany({ post: req.params.id });
       if (req.xhr) {
         return res.status(200).json({

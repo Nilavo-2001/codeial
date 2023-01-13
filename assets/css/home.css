@@ -7,3 +7,21 @@
     width: 30%;
     border-left: solid 2px black;
     padding: 10px; }
+  #main-container .post-like {
+    display: flex;
+    margin-bottom: 5px; }
+  #main-container .comment-like {
+    display: flex;
+    margin-bottom: 5px; }
+  #main-container .show-post-like {
+    display: flex;
+    margin-bottom: 5px; }
+  #main-container .show-comment-like {
+    display: flex;
+    margin-bottom: 5px; }
+  #main-container .like-number {
+    padding: 2px; }
+  #main-container .like-symbol {
+    cursor: pointer; }
+    #main-container .like-symbol a {
+      text-decoration: none; }

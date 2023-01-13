@@ -17,6 +17,7 @@ function createComment(selector) {
         deleteComment(
           `#comment-${response.data.comment._id} .delete-comment-button`
         );
+        createCommentLike(`#comment-${response.data.comment._id} + .comment-like .like-symbol`);
         new Noty({
           theme: "relax",
           text: "Comment Created",
@@ -44,6 +45,14 @@ let getComment = (comment) => {
   <br />
   <small> ${comment.user.name} </small>
 </p>
+<div class="comment-like">
+    <div data-id="${comment._id}" class="like-symbol">
+      🤍
+    </div>
+    <div data-id="${comment._id}" class="like-number">
+    ${(comment.likes.length > 0) ? comment.likes.length : ""}
+    </div >
+</div >
 `;
 };
 function deleteComment(selector) {
@@ -71,6 +80,34 @@ function deleteComment(selector) {
     });
   });
 }
+function createCommentLike(selector) {
+  console.log("I am called");
+  //console.log(document.querySelectorAll(selector));
+  $(selector).click(function (e) {
+    console.log("comment like clicked");
+    const id = this.getAttribute("data-id");
+    let symbol = this;
+    $.ajax({
+      type: "post",
+      url: `/likes/toggle/?id=${id}&&type=Comment`,
+      success: function (response) {
+        console.log(response);
+        if (!response.deleted) {
+          symbol.innerHTML = "❤️";
+        }
+        else {
+          symbol.innerHTML = "🤍";
+        }
+        const currentLikes = (response.likes > 0) ? response.likes : "";
+        $(`.like-number[data-id=${id}]`).html(currentLikes)
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  })
+}
+createCommentLike(".comment-like .like-symbol");
 createComment(".new-comment-form");
 deleteComment(".delete-comment-button");
-export { deleteComment, createComment, getComment };
+export { deleteComment, createComment, getComment, createCommentLike };

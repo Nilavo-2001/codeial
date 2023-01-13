@@ -1,16 +1,49 @@
 <p id="comment-<%=comment.id%>">
   <% if (locals.user && locals.user.id==comment.user.id) { %>
-  <small>
-    <button>
-      <a
-        class="delete-comment-button"
-        href="/comment/destroy/<%= comment.id %> "
-      >
-        Delete
-      </a>
-    </button>
-  </small>
-  <% } %> <%= comment.content %>
-  <br />
-  <small> <%= comment.user.name %> </small>
+    <small>
+      <button>
+        <a class="delete-comment-button" href="/comment/destroy/<%= comment.id %> ">
+          Delete
+        </a>
+      </button>
+    </small>
+    <% } %>
+      <%= comment.content %>
+        <br />
+        <small>
+          <%= comment.user.name %>
+        </small>
 </p>
+
+<% if (locals.user) { %>
+  <div class="comment-like">
+    <div data-id="<%= comment.id %>" class="like-symbol">
+      <% let userHasLiked=false; %>
+        <% for( like of comment.likes ) { %>
+          <% if (like.user==locals.user.id) { %>
+            <% userHasLiked=true; %>
+              <% break; %>
+                <% } %>
+                  <% } %>
+                    <% if (userHasLiked) { %>
+                      <%= "❤️" %>
+                        <% } else { %>
+                          <%= "🤍" %>
+                            <% } %>
+    </div>
+    <div data-id="<%= comment.id %>" class="like-number">
+      <% if (comment.likes.length>0) { %>
+        <%= comment.likes.length %>
+          <% } %>
+    </div>
+  </div>
+  <% } else { %>
+    <div class="show-comment-like">
+      <div class="like-symbol"><a href="http://localhost:8000/users/sign-in">🤍</a></div>
+      <div class="like-number">
+        <% if (comment.likes.length>0) { %>
+          <%= comment.likes.length %>
+            <% } %>
+      </div>
+    </div>
+    <% } %>

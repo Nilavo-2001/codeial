@@ -1,6 +1,7 @@
 const comments = require("../models/comment");
 const posts = require("../models/posts");
 const mailer = require("../mailers/comments_mailer");
+const likes = require("../models/likes");
 module.exports.create = async function (req, res) {
   try {
     let post = await posts.findById(req.body.post);
@@ -33,14 +34,18 @@ module.exports.create = async function (req, res) {
 
 module.exports.destroy = async function (req, res) {
   let comment = await comments.findById(req.params.id);
-  console.log(req.params.id);
-  console.log(comment);
+  //console.log(req.params.id);
+  //console.log(comment);
   if ((comment.user = req.user.id)) {
     let postid = comment.post;
     await comment.remove();
     await posts.findByIdAndUpdate(postid, {
       $pull: { comments: req.params.id },
     });
+    await likes.deleteMany({
+      likeable: req.params.id,
+      onModel: "Comment"
+    })
     if (req.xhr) {
       return res.status(200).json({
         data: {

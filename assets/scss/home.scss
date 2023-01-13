@@ -9,4 +9,29 @@
     border-left: solid 2px black;
     padding: 10px;
   }
+  .post-like {
+    display: flex;
+    margin-bottom: 5px;
+  }
+  .comment-like {
+    display: flex;
+    margin-bottom: 5px;
+  }
+  .show-post-like {
+    display: flex;
+    margin-bottom: 5px;
+  }
+  .show-comment-like {
+    display: flex;
+    margin-bottom: 5px;
+  }
+  .like-number {
+    padding: 2px;
+  }
+  .like-symbol {
+    cursor: pointer;
+    a {
+      text-decoration: none;
+    }
+  }
 }
