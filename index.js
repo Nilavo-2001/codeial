@@ -14,7 +14,10 @@ const MongoStore = require("connect-mongo");
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 const flash_midware = require("./middlewares/flash_message");
-
+const chatServer = require("http").Server(app);
+const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
+chatServer.listen(5000);
+console.log("chat server is listening at 5000");
 // using sass middleware
 app.use(
   sassMiddleware({

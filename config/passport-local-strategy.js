@@ -36,6 +36,7 @@ passport.deserializeUser(function (id, done) {
       console.log("error in finding user---> passport");
       return done(err);
     }
+    console.log(user);
     return done(null, user);
   });
 });
@@ -53,6 +54,7 @@ passport.checkAuthentication = function (req, res, next) {
 };
 passport.setAuthenticatedUser = function (req, res, next) {
   if (req.isAuthenticated()) {
+    console.log(req.user);
     res.locals.user = req.user;
   }
   next(); // this is also called for both local and google

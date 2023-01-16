@@ -5,25 +5,24 @@ const { json } = require("express");
 const { findOne } = require("../models/posts");
 
 module.exports.toggleLike = async (req, res) => {
-  // console.log(req.query.id, req.query.type);
   try {
-    let likeable;
-    let deleted = false;
-    const id = req.query.id;
-    const type = req.query.type;
+    let likeable; // variable to store the parent
+    let deleted = false; // deleted if flase means comment created and true means comment deleted
+    const id = req.query.id;  // the id of the parent
+    const type = req.query.type; // the type of parent that is post or comment
     if (type == "Post") {
-      likeable = await posts.findById(id).populate("likes");
+      likeable = await posts.findById(id).populate("likes"); // fetching the post if the post is parent
     } else {
-      likeable = await comments.findById(id).populate("likes");
+      likeable = await comments.findById(id).populate("likes"); // fetching the comment if the comment is parent
     }
-    let exsistingLike = await likes.findOne({
+    let exsistingLike = await likes.findOne({ // finding if the like exsists
       likeable: id,
       user: req.user._id,
       onModel: type
     });
     //console.log(exsistingLike);
     if (exsistingLike) {
-      //console.log("I am here");
+      // if the like exsists then delete the like
       likeable.likes.pull(exsistingLike._id),
         likeable.save();
 
@@ -31,13 +30,13 @@ module.exports.toggleLike = async (req, res) => {
       deleted = true
     }
     else {
-
+      // if the like doesnot exsists then create the like
       let newLike = await likes.create({
         user: req.user._id,
         likeable: id,
         onModel: type
       })
-      //console.log(newLike);
+      // adding the like to its parent
       likeable.likes.push(newLike._id);
       likeable.save();
     }
