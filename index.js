@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+require("./config/view-helper")(app);
+const env = require("./config/environment")
+const logger = require('morgan');
 const cookieParser = require("cookie-parser");
 const port = 8000;
 const expressLayouts = require("express-ejs-layouts");
@@ -17,22 +20,28 @@ const flash_midware = require("./middlewares/flash_message");
 const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
 chatServer.listen(5000);
+const path = require('path');
 console.log("chat server is listening at 5000");
 // using sass middleware
-app.use(
-  sassMiddleware({
-    src: "./assets/scss",
-    dest: "./assets/css",
-    debug: false,
-    outputStyle: "extended",
-    prefix: "/css",
-  })
-);
-
+if (env.name == 'development') {
+  app.use(
+    sassMiddleware({
+      src: path.join(__dirname, env.asset_path, "scss"),
+      dest: path.join(__dirname, env.asset_path, "css"),
+      debug: false,
+      outputStyle: "extended",
+      prefix: "/css",
+    })
+  );
+}
 app.use(express.urlencoded()); // used for filling up req.body
 app.use(cookieParser());
-app.use(express.static("./assets")); // used for serving static files like html css js
+app.use(express.static(path.join(__dirname, env.asset_path))); // used for serving static files like html css js
 app.use("/uploads", express.static("./uploads")); // to search in the given folder for any file path that starts with /uploads
+
+app.use(logger(env.morgan.mode, env.morgan.options));
+
+
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
 app.set("layout extractStyles", true);
@@ -46,7 +55,7 @@ app.use(
   session({
     name: "codeial",
     // to do : change the secret before deployment
-    secret: "blahblah",
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {

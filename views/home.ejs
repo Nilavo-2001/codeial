@@ -1,6 +1,6 @@
 <!-- already mentioned the asset folder in express.static so the href will be written accordingly -->
-<link rel="stylesheet" href="/css/home.css">
-<link rel="stylesheet" href="/css/chat_box.css">
+<link rel="stylesheet" href="/css/<%= assetPath('home.css') %>">
+<link rel="stylesheet" href="/css/<%= assetPath('chat_box.css') %>">
 
 <div id="main-container">
   <div id="feed-posts">
@@ -36,11 +36,11 @@
   <%- include('_chat_box') -%>
 </div>
 
-<script type="module" src="/js/home_posts.js"></script>
+<script type="module" src="/js/<%=assetPath('home_posts.js')%>"></script>
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
   integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous">
   </script>
-<script src="/js/chat_engine.js"></script>
+<script src="/js/<%=assetPath('chat_engine.js')%>"></script>
 <% if (locals.user) { %>
   <script>
     console.log("chat engine object created");

@@ -1,13 +1,14 @@
 const passport = require("passport");
 const JWTStrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
+const env = require("./environment");
 
 const User = require("../models/user");
 // main use of this strategy is to decrypt the jwt token
 let opts = {
   // the jwt token is send by the user in req  with header so we extract it from there
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "codeial", // key used for encryption of project
+  secretOrKey: env.jwt_secret, // key used for encryption of project
 };
 
 passport.use(
