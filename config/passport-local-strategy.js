@@ -9,9 +9,6 @@ passport.use(
     },
     // the function defined to check if the user exsists and then creating a session for the user
     function (email, password, done) {
-      // User.find({}, (err, user) => {
-      //   console.log(user);
-      // })
       User.findOne({ email: email }, (err, user) => {
         if (err) {
           console.log("error in finding user---> passport");
