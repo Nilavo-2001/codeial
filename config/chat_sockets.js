@@ -2,8 +2,8 @@ const { Server } = require("socket.io");
 module.exports.chatSockets = function (chatServer) {
     const io = new Server(chatServer, {
         cors: {
-            origin: 'http://localhost:8000',
-            allowedHeaders: ["http://localhost:5000"], // very important to mention
+            origin: 'http://3.94.121.242:8000',
+            allowedHeaders: ["http://3.94.121.242:5000"], // very important to mention
             credentials: true
         }
     });

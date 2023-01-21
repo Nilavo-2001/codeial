@@ -4,7 +4,7 @@ class ChatEngine {
 
         this.userName = userName;
         this.emailId = emailId;
-        this.socket = io.connect("http://localhost:5000")
+        this.socket = io.connect("http://3.94.121.242:5000")
         if (this.emailId) {
             this.connectionHandler();
         }
