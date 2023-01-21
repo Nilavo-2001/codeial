@@ -110,4 +110,4 @@ function createCommentLike(selector) {
 createCommentLike(".comment-like .like-symbol");
 createComment(".new-comment-form");
 deleteComment(".delete-comment-button");
-export { deleteComment, createComment, getComment, createCommentLike };
+

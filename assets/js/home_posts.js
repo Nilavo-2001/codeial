@@ -1,5 +1,5 @@
 //ajax req
-import { createComment, deleteComment, getComment, createCommentLike } from "./comments_posts.js";
+
 
 let createPost = () => {
   let form = $("#new-post-form");

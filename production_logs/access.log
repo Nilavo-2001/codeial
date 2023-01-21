@@ -136,3 +136,30 @@
 ::1 - - [20/Jan/2023:14:35:37 +0000] "GET /js/comments_posts.js HTTP/1.1" 404 159 "http://localhost:8000/js/home_posts-0021a554a3.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 [0mGET / [32m200[0m 109.370 ms - 8701[0m
 [0mGET /favicon.ico [33m404[0m 14.943 ms - 150[0m
+[0mGET / [32m200[0m 122.525 ms - 19472[0m
+[0mGET / [36m304[0m 187.299 ms - -[0m
+[0mGET / [36m304[0m 64.412 ms - -[0m
+[0mGET / [36m304[0m 84.093 ms - -[0m
+::1 - - [21/Jan/2023:17:59:54 +0000] "GET / HTTP/1.1" 200 2885 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:01:05 +0000] "GET / HTTP/1.1" 200 2885 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:34 +0000] "GET / HTTP/1.1" 200 2885 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:39 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:40 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:40 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:42 +0000] "GET /users/sign-in HTTP/1.1" 200 2247 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:44 +0000] "GET /users/auth/google/ HTTP/1.1" 302 0 "http://localhost:8000/users/sign-in" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:45 +0000] "GET /users/auth/google/callback?code=4%2F0AWgavdcRXvawtf109nIYtn_WHlzVv3l0MOziVUkIYthmuanAIn-jEo6ZCbga48ZG1fxw5g&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none HTTP/1.1" 302 46 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:45 +0000] "GET / HTTP/1.1" 200 4052 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:51 +0000] "POST /posts/create HTTP/1.1" 200 460 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:53 +0000] "POST /likes/toggle/?id=63cc2943e708660c4cabc250&&type=Post HTTP/1.1" 200 57 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:54 +0000] "POST /likes/toggle/?id=63cc2943e708660c4cabc250&&type=Post HTTP/1.1" 200 56 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:55 +0000] "POST /likes/toggle/?id=63cc2943e708660c4cabc250&&type=Post HTTP/1.1" 200 57 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:56 +0000] "POST /likes/toggle/?id=63cc2943e708660c4cabc250&&type=Post HTTP/1.1" 200 56 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:04:58 +0000] "GET / HTTP/1.1" 200 5200 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:05:00 +0000] "POST /likes/toggle/?id=63cc2943e708660c4cabc250&&type=Post HTTP/1.1" 200 57 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:05:01 +0000] "POST /likes/toggle/?id=63cc2943e708660c4cabc250&&type=Post HTTP/1.1" 200 56 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:05:06 +0000] "GET /users/sign-out HTTP/1.1" 302 46 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:05:06 +0000] "GET / HTTP/1.1" 200 3775 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:05:09 +0000] "GET / HTTP/1.1" 200 3568 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:05:11 +0000] "GET / HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+::1 - - [21/Jan/2023:18:05:16 +0000] "GET /users/sign-in HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
