@@ -34,7 +34,7 @@ if (env.name == 'development') {
     })
   );
 }
-app.use(express.urlencoded()); // used for filling up req.body
+app.use(express.urlencoded({ extended: false })); // used for filling up req.body
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, env.asset_path))); // used for serving static files like html css js
 app.use("/uploads", express.static("./uploads")); // to search in the given folder for any file path that starts with /uploads

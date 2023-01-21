@@ -60,7 +60,7 @@ gulp.task('clean:assets', async function (done) {
     await deleteSync('./public/**')
     done();
 });
-gulp.task('build', gulp.series('clean:assets', 'css', 'js', 'images'), function (done) {
+gulp.task('build', gulp.series('css', 'js', 'images'), function (done) {
     console.log('Building assets');
     done();
 });
