@@ -136,3 +136,12 @@
 ::1 - - [20/Jan/2023:14:35:37 +0000] "GET /js/comments_posts.js HTTP/1.1" 404 159 "http://localhost:8000/js/home_posts-0021a554a3.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 [0mGET / [32m200[0m 109.370 ms - 8701[0m
 [0mGET /favicon.ico [33m404[0m 14.943 ms - 150[0m
+[0mGET / [32m200[0m 103.757 ms - 8763[0m
+[0mGET /users/sign-in [32m200[0m 12.730 ms - 2214[0m
+[0mPOST /users/create-session [36m302[0m 28.054 ms - 46[0m
+[0mGET / [32m200[0m 62.331 ms - 12696[0m
+[0mPOST /posts/create [32m200[0m 85.507 ms - 398[0m
+[0mGET / [32m200[0m 168.736 ms - 13801[0m
+[0mPOST /posts/create [32m200[0m 85.561 ms - 403[0m
+[0mPOST /posts/create [32m200[0m 36.143 ms - 403[0m
+[0mPOST /posts/create [32m200[0m 39.692 ms - 403[0m
